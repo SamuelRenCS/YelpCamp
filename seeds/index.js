@@ -30,10 +30,11 @@ async function seedImg() {
 
 const seedDB = async () => {
   await Campground.deleteMany({});
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 5; i++) {
     const rand1000 = Math.floor(Math.random() * 1000);
     const price = Math.floor(Math.random() * 20) + 10;
     const camp = new Campground({
+      author: "669ab2dd9f1252b2878ebb38",
       location: `${cities[rand1000].city}, ${cities[rand1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
       image: await seedImg(),
