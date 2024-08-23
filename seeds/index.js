@@ -22,7 +22,7 @@ async function seedImg() {
         collections: 483251,
       },
     });
-    return resp.data.urls.small;
+    return resp.data.urls.raw;
   } catch (e) {
     console.log(e);
   }
@@ -37,10 +37,23 @@ const seedDB = async () => {
       author: "669ab2dd9f1252b2878ebb38",
       location: `${cities[rand1000].city}, ${cities[rand1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
-      image: await seedImg(),
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, voluptate.",
       price,
+      geometry: {
+        type: "Point",
+        coordinates: [cities[rand1000].longitude, cities[rand1000].latitude],
+      },
+      images: [
+        {
+          url: await seedImg(),
+          filename: "unsplash1",
+        },
+        {
+          url: await seedImg(),
+          filename: "unsplash2",
+        },
+      ],
     });
     await camp.save();
   }
